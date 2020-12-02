@@ -53,4 +53,22 @@ button.on("click", ()=> {
     var filterCombinedData = tableData.filter(tableData => tableData.datetime === inputDate && tableData.city === inputCity);
     //console.log(filterCombinedData)
 
+
+    $tbody.HTML("");
+
+    let response = {
+        filterDate, filterCity, filterCombinedData
+    }
+
+    //Accomodate combining multiple filters- create new var
+    if(response.filterCombinedData.length !== 0) {
+        addData(filterCombinedData);
+    }
+    else if(response.filterCombinedData.length === 0 && ((response.filterDate.length !==0 || response.filterCity.length !==0))) {
+        addData(filterDate) || addData(filterCity);
+    }
+    else {
+        $tbody.append("tr").append("td").text("No Sightings Here... Move on...");
+    }
+
 })
